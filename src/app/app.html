@@ -1,0 +1,8 @@
+<h1>{{name()}}</h1>
+<button (click)="updateName()">Update</button>
+<select name="" id="" (change)="vehicleNameSelectionChange($event)">
+    @for (item of optionsList; track item.value) {
+    <option [value]="item.value">{{item.label}}</option>
+    }
+</select>
+<app-table [dateList]="vehicleResponse()" />
