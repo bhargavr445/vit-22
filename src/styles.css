@@ -1,3 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "tailwindcss";
+
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    scroll-margin-top: 100px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0 0px 10px 0px;
+    background-color: #f8f9fa;
+}
