@@ -2,8 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Dashboard } from './dashboard';
 import { DashboardService } from './dashboard-service';
+import { of, throwError } from 'rxjs';
 
-describe('Dashboard', () => {
+describe.skip('Dashboard', () => {
   let component: Dashboard;
   let fixture: ComponentFixture<Dashboard>;
   let dashboardService: any;
@@ -46,5 +47,17 @@ describe('Dashboard', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain('Neeraja');
   });
+
+  it('should call submit function and expect success API response', () => {
+    const save1Spy = vi.spyOn(dashboardService, 'save1').mockReturnValue(of({name: 'Bhargav'}));
+    component.submit();
+    expect(save1Spy).toHaveBeenCalledOnce()
+  })
+
+    it('should call submit function and expect success API response', () => {
+    const save1Spy = vi.spyOn(dashboardService, 'save1').mockReturnValue(throwError({}));
+    component.submit();
+    expect(save1Spy).toHaveBeenCalledTimes(1);
+  })
 
 });

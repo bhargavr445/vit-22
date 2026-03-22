@@ -49,7 +49,6 @@ it('should mock data coming from service', async () => {
   
   const button: HTMLButtonElement = fixture.nativeElement.querySelector("button");
   expect(button).toBeTruthy();
-  
   button.click();
   fixture.detectChanges(); // ✅ Trigger change detection after click
   setTimeout(() => {

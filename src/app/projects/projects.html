@@ -1,1 +1,83 @@
-<p>projects works!</p>
+<form  class="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg space-y-4" [formRoot]="projectForm">
+
+    <!-- Project Name -->
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">
+            Project Name
+        </label>
+        @let projectName = projectForm.projectName;
+        <input type="text" [formField]="projectName"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter project name" />
+        @if(projectName().touched()) {
+        @for (error of projectName().errors(); track $index) {
+        <p class="mt-1 text-sm text-red-600">{{error?.message}} </p>
+        }
+        }
+    
+    </div>
+
+    <!-- Project Title -->
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">
+            Project Title
+        </label>
+        @let projectTitle_control = projectForm.projectTitle;
+        <input type="text" [formField]="projectForm.projectTitle"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter project title" />
+
+            @if(projectTitle_control().touched()) {
+        @for (error of projectTitle_control().errors(); track $index) {
+        <p class="mt-1 text-sm text-red-600">{{error?.message}} </p>
+        }
+        }
+    </div>
+
+    <!-- Project Category -->
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">
+            Project Category
+        </label>
+        <input type="text" [formField]="projectForm.projectCategory"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter category" />
+    </div>
+
+        <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">
+            Projects
+        </label>
+        @for (_item of projects().projects; track $index) {
+            @let projectsField = projectForm.projects[$index];
+            <input type="text" [formField]="projectsField"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter category" />
+        
+           
+                    @if(projectsField().invalid()) {
+                    @for (error of projectsField().errors(); track $index) {
+                    <div class="validation-msg">{{error.message}}</div>
+                    }
+                    }
+                }
+
+        <button (click)="addProject()">Add</button>
+        <!-- <input type="text" [formField]="projectForm.projectCategory"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter category" /> -->
+    </div>
+
+    <!-- Submit Button -->
+    <div class="pt-2">
+        <button type="submit"
+            class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200">
+            Submit
+        </button>
+        <button type="reset" (click)="focusNextInvvalidField()"
+            class="w-full bg-yellow-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200">
+            Next
+        </button>
+    </div>
+
+</form>

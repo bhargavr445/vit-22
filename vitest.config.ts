@@ -5,7 +5,8 @@ export default defineConfig({
     coverage: {
       provider: 'istanbul',             // or 'c8'
       reporter: ['text', 'lcov', 'html'],
-      reportsDirectory: 'coverage'
+      reportsDirectory: 'coverage',
+      // include: ['**/*.spec.ts']
     }
   }
 })

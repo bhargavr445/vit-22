@@ -15,4 +15,12 @@ describe('DashboardService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should add 2 numbers', () => {
+    const res = service.add(10, 20);
+    expect(res).toBe(30)
+  })
+
+
+
 });
