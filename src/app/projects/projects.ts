@@ -13,7 +13,8 @@ export class Projects {
     projectName: '',
     projectTitle: '',
     projectCategory: '',
-    projects: ['']
+    projects: [''],
+    projectsOffering: []
   })
 
   projectForm = form(
@@ -28,7 +29,7 @@ export class Projects {
         },
         message: 'Select only IT'
       }),
-      applyEach(path.projects, projectsRequiredValidationSchema)
+        applyEach(path.projects, projectsRequiredValidationSchema)
     },
     {
       submission: {
@@ -38,8 +39,6 @@ export class Projects {
       }
     }
   )
-
-
 
   reset() {
     this.projectForm().reset();
@@ -66,6 +65,13 @@ export class Projects {
     }))
   }
 
+  addProjectsOffering(): void {
+    this.projects.update((previousProjects) => ({
+      ...previousProjects,
+      projectsOffering: [...previousProjects.projectsOffering, {clientName: '',country: ''}]
+    }))
+  }
+
 }
 
 interface ProjectsFormI {
@@ -73,8 +79,15 @@ interface ProjectsFormI {
   projectTitle: string;
   projectCategory: string;
   projects: string[];
+  projectsOffering: ProjectsOfferingI[];
+}
+
+interface ProjectsOfferingI {
+  clientName: string;
+  country: string;
+
 }
 
 export const projectsRequiredValidationSchema = schema((projects) => {
-  required(projects, {message: 'Projects are Required.'})
+  required(projects, { message: 'Projects are Required.' })
 }) 

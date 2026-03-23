@@ -1,4 +1,4 @@
-<form  class="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg space-y-4" [formRoot]="projectForm">
+<form class="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg space-y-4" [formRoot]="projectForm">
 
     <!-- Project Name -->
     <div>
@@ -6,15 +6,14 @@
             Project Name
         </label>
         @let projectName = projectForm.projectName;
-        <input type="text" [formField]="projectName"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Enter project name" />
+        @let inp = "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500";
+        <input type="text" [formField]="projectName" class="inp" placeholder="Enter project name" />
         @if(projectName().touched()) {
         @for (error of projectName().errors(); track $index) {
         <p class="mt-1 text-sm text-red-600">{{error?.message}} </p>
         }
         }
-    
+
     </div>
 
     <!-- Project Title -->
@@ -27,7 +26,7 @@
             class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Enter project title" />
 
-            @if(projectTitle_control().touched()) {
+        @if(projectTitle_control().touched()) {
         @for (error of projectTitle_control().errors(); track $index) {
         <p class="mt-1 text-sm text-red-600">{{error?.message}} </p>
         }
@@ -44,28 +43,51 @@
             placeholder="Enter category" />
     </div>
 
-        <div>
+    <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">
             Projects
         </label>
         @for (_item of projects().projects; track $index) {
-            @let projectsField = projectForm.projects[$index];
-            <input type="text" [formField]="projectsField"
+        @let projectsField = projectForm.projects[$index];
+        <input type="text" [formField]="projectsField"
             class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Enter category" />
-        
-           
-                    @if(projectsField().invalid()) {
-                    @for (error of projectsField().errors(); track $index) {
-                    <div class="validation-msg">{{error.message}}</div>
-                    }
-                    }
-                }
 
-        <button (click)="addProject()">Add</button>
+
+        @if(projectsField().invalid()) {
+        @for (error of projectsField().errors(); track $index) {
+        <div class="validation-msg">{{error.message}}</div>
+        }
+        }
+        }
+
+        <button (click)="addProject()">Add Projects</button>
         <!-- <input type="text" [formField]="projectForm.projectCategory"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Enter category" /> -->
+    </div>
+
+    <div>
+
+        @for (item of projects().projectsOffering; track $index) {
+        @let projectsOfferingControl = projectForm.projectsOffering[$index];
+        <label class="block text-sm font-medium text-gray-700 mb-1">
+            Client Name
+        </label>
+        <input type="text" [formField]="projectsOfferingControl.clientName"
             class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Enter category" /> -->
+            placeholder="Enter category" />
+
+
+        <label class="block text-sm font-medium text-gray-700 mb-1">
+            Country
+        </label>
+        <input type="text" [formField]="projectsOfferingControl.country"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter category" />
+
+        }
+        <button (click)="addProjectsOffering()">Add Projects offering</button>
     </div>
 
     <!-- Submit Button -->
