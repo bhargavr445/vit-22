@@ -1,13 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { form, FormField } from '@angular/forms/signals';
+import { form, FormField, maxLength, minLength, required, SchemaPathTree } from '@angular/forms/signals';
 
 @Component({
+  selector: 'app-signup',
   imports: [FormField],
-  template: `
-    <input type="email" [formField]="signUpForm.userName" />
-    <input type="password" [formField]="signUpForm.password" />
-    <input type="password" [formField]="signUpForm.confirmPassword" />
-  `,
+  templateUrl: './signup.html',
+  styleUrl: './signup.css'
 })
 export class Signup {
 
@@ -17,8 +15,20 @@ export class Signup {
     confirmPassword: '',
   })
 
-  signUpForm = form(this.signUpModel);
-  
+  signUpForm = form(
+    this.signUpModel,
+    (path: SchemaPathTree<SignUpI>) => {
+      required(path.userName, { message: 'User Name is required' })
+      maxLength(path.userName, 10, { message: 'Only 10 Chars allowed' })
+      minLength(path.userName, 4, { message: 'Min 4 chars required' })
+      required(path.password, { message: 'Password is required' })
+      required(path.confirmPassword, {
+        when: (ctx) => { return !!ctx.valueOf(path.password) },
+        message: 'Confirm Password is required'
+      })
+    }
+  );
+
 }
 
 export interface SignUpI {
@@ -26,3 +36,4 @@ export interface SignUpI {
   password: string;
   confirmPassword: string;
 }
+

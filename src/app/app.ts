@@ -4,10 +4,11 @@ import { Table } from './table/table';
 import { Header } from "./header/header";
 import { RouterOutlet } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Signup } from "./signup/signup";
 
 @Component({
   selector: 'app-root',
-  imports: [Table, Header, RouterOutlet],
+  imports: [Table, Header, RouterOutlet, Signup],
   providers: [CourseService],
   templateUrl: './app.html',
   styleUrl: './app.css'

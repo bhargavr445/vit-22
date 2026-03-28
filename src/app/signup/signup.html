@@ -1,0 +1,40 @@
+<div class="form-container">
+
+  <!-- Email -->
+  <div class="form-group">
+    <label>Email</label>
+    <input type="email" [formField]="signUpForm.userName" placeholder="Enter your email" />
+
+    @if(signUpForm.userName().touched()) {
+      @for (error of signUpForm.userName().errors(); track $index) {
+        <p class="error">{{ error.message }}</p>
+      }
+    }
+  </div>
+
+  <!-- Password -->
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" [formField]="signUpForm.password" placeholder="Enter password" />
+        @if(signUpForm.password().touched()) {
+      @for (error of signUpForm.password().errors(); track $index) {
+        <p class="error">{{ error.message }}</p>
+      }
+    }
+  </div>
+
+  <!-- Confirm Password -->
+  <div class="form-group">
+    <label>Confirm Password</label>
+    <input type="password" [formField]="signUpForm.confirmPassword" placeholder="Re-enter password" />
+        @if(signUpForm.confirmPassword().touched()) {
+      @for (error of signUpForm.confirmPassword().errors(); track $index) {
+        <p class="error">{{ error.message }}</p>
+      }
+    }
+  </div>
+
+  <!-- Button -->
+  <button type="submit" class="submit-btn">Sign Up</button>
+
+</div>
