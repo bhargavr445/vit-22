@@ -18,3 +18,7 @@ body {
     margin: 0 0px 10px 0px;
     background-color: #f8f9fa;
 }
+
+input.ng-invalid.ng-touched {
+    border-color: oklch(63.7% 0.237 25.331);
+}

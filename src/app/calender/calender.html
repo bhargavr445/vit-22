@@ -1,1 +1,28 @@
-<p>calender works!</p>
+<form (ngSubmit)="submitForm2()">
+  <div>
+    <input
+      type="text"
+      [(ngModel)]="name2"
+      [ngModelOptions]="{ standalone: true }"
+      placeholder="Enter Name"
+    />
+
+    <input
+      type="text"
+      [(ngModel)]="id2"
+      [ngModelOptions]="{ standalone: true }"
+      placeholder="Enter ID"
+    />
+
+    <form [formGroup]="testForm" (submit)="submitForm2()">
+      <input
+        name="field1"
+        formControlName="name"
+        placeholder="Enter Email..."
+      />
+      <!-- <button type="submit" style="display: none"></button> -->
+    </form>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
